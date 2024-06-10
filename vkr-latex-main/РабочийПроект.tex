@@ -1,0 +1,243 @@
+\newsection
+\section{Рабочий проект}
+\subsection{Спецификация компонентов и классов программной системы}
+Десктоп-приложение разделено на модули, исходя из выполняемых ими функций. Далее приведено описание основных модулей и методов этих модулей. Фрагменты исходного кода приведены в приложении Б.
+\subsubsection{Спецификация модуля bot\_main.py}
+
+Основной файл для запуска Telegram-бота. 
+Таблица 4.1 – Поля модуля "bot\_main.py".
+
+
+\begin{xltabular}{\textwidth}{|p{3cm}|p{2cm}|p{2cm}|X|}
+	\caption{Поля модуля  "bot\_main.py"\label{news1:table}}\\ \hline
+	\centrow Имя поля  & \centrow Область видимости & \centrow Тип данных &\centrow Описание  \\ \hline
+	\thead{1} & \thead{2} & \thead{3} & \centrow {4} \\ \hline
+	\endfirsthead
+	\thead{1} & \thead{2} & \centrow {3} &\centrow {4}  \\ \hline
+	\finishhead
+	bot\_token & global& str & Токен для доступа к API Telegram. \\ \hline
+	bot & global& объект бота от библиотеки «telebot» & Объект бота, инициализированный с токеном. \\ \hline
+	data\_file\_path & global& str & Путь к файлу с данными ключевых слов. \\ \hline
+\end{xltabular}
+
+\subsubsection{Спецификация модуля config.py}
+Конфигурационный файл для хранения токена API. Поля модуля config.py описаны в таблице 4.2
+
+\begin{xltabular}{\textwidth}{|p{3cm}|p{2cm}|p{2cm}|X|}
+	\caption{Поля модуля  config.py\label{news2:table}}\\ \hline
+	\centrow Имя поля  & \centrow Область видимости & \centrow Тип данных &\centrow Описание  \\ \hline
+	\thead{1} & \thead{2} & \thead{3} & \centrow {4} \\ \hline
+	\endfirsthead
+	\thead{1} & \thead{2} & \centrow {3} &\centrow {4}  \\ \hline
+	\finishhead
+	API\_TOKEN & global& str & Конфигурационный файл для хранения токена API. \\ \hline
+\end{xltabular}
+\subsubsection{Спецификация модуля file\_buffer.py}
+Этот модуль управляет буфером файлов для хранения и управления файлами, полученными через бота. Поля модуля buffer.py описаны в таблице 
+\begin{xltabular}{\textwidth}{|p{4.5cm}|p{2cm}|p{2cm}|X|}
+	\caption{file\_buffer.py\label{news3:table}}\\ \hline
+	\centrow Имя поля  & \centrow Область видимости & \centrow Тип данных &\centrow Описание  \\ \hline
+	\thead{1} & \thead{2} & \thead{3} & \centrow {4} \\ \hline
+	\endfirsthead
+	\thead{1} & \thead{2} & \centrow {3} &\centrow {4}  \\ \hline
+	\finishhead
+	FILE\_BUFFER\_DIR & global& str & Директория для хранения файлов. \\ \hline
+	initialize\_buffer() & global& function & Инициализация директории буфера, если она не существует. \\ \hline
+	save\_file() & public& function & Сохранение файла, полученного от пользователя. \\ \hline
+	get\_file\_path() & global & function & Получение пути к сохраненному файлу. \\ \hline
+	remove\_file() & global & function & Удаление файла. \\ \hline
+\end{xltabular}
+\subsubsection{Спецификация модуля message\_handlers.py}
+Этот модуль обрабатывает входящие сообщения и сохраняет их, используя ключевые слова. Поля модуля message\_handlers.py описаны в таблице 4.4.
+
+\begin{xltabular}{\textwidth}{|p{4.5cm}|p{2cm}|p{2cm}|X|}
+	\caption{file\_buffer.py\label{news4:table}}\\ \hline
+	\centrow Имя поля  & \centrow Область видимости & \centrow Тип данных &\centrow Описание  \\ \hline
+	\thead{1} & \thead{2} & \thead{3} & \centrow {4} \\ \hline
+	\endfirsthead
+	\thead{1} & \thead{2} & \centrow {3} &\centrow {4}  \\ \hline
+	\finishhead
+	chat\_keywords & global& list & Загрузка ключевых слов из данных. \\ \hline
+	register\_message\_handlers & global& function & Регистрация обработчиков сообщений. \\ \hline
+	handle\_media\_message & function& function & Обработка мультимедийных сообщений (текст, фото, видео, документ). \\ \hline
+\end{xltabular}
+\subsubsection{Спецификация модуля weather\_handler.py}
+Модуль для работы с API погоды и отправки прогнозов погоды. Поля модуля handler.py описаны в таблице 4.5.
+\begin{xltabular}{\textwidth}{|p{5cm}|p{2cm}|p{2cm}|X|}
+	\caption{Спецификация методов модуля «main.py»\label{news5:table}}\ \hline
+	\centrow Имя поля  & \centrow Область видимости & \centrow Тип данных &\centrow Описание \ \hline
+	\thead{1} & \thead{2} & \thead{3} & \centrow {4} \\ \hline
+	\endfirsthead
+	\continuecaption{Продолжение таблицы \ref{news5:table}}
+	\thead{1} & \thead{2} & \thead{3} & \centrow {4} \\ \hline
+	\finishhead
+
+WEATHER\_API\_URL & global& str & URL для API прогноза погоды. \\ \hline
+CURRENT\_WEATHER\-\_API\_URL & global& str & URL для текущей погоды. \\ \hline
+API\_KEY & global& str & API ключ для доступа к сервису погоды. \\ \hline
+WEATHER\_FILE & global& function & Файл конфигурации для хранения городов. \\ \hline
+load\_weather\_config() & global& function & Загрузка конфигурации погоды. \\ \hline
+save\_weather\_config(data) & global& function & Сохранение конфигурации погоды. \\ \hline
+get\_weather & global& function & Получение прогноза погоды для города. \\ \hline
+get\_current\_weather & global& function & Получение текущей погоды для города. \\ \hline
+format\_weather\_message & local& list & Форматирование сообщения с прогнозом погоды. \\ \hline
+format\_current\-\_weather\_message & local & list & Форматирование сообщения с текущей погодой. \\ \hline
+send\_daily\_weather & global& function & Отправка ежедневного прогноза погоды. \\ \hline
+set\_weather\_city & global& function & Установка города для получения погоды. \\ \hline
+get\_and\_send\-\_current\_weather & global& function & Получение и отправка текущей погоды. \\ \hline
+register\_weather\-\_handlers(bot) & global & function & Регистрация обработчиков команд для погоды. \\ \hline
+\end{xltabular}
+
+\subsection {Тестирование программной системы}
+\subsubsection{Системное тестирование программной системы}
+Для проверки работоспособности программной системы было выполнено тестирование разработанного функционала межпользовательского взаимодействия. Результаты проведенного тестирования[25][26] пред- ставлены в данном разделе в виде снимков экрана при работе программной системы.
+
+При начала работы необходимо добавить бота в чат который нужно администрировать. На рисунке 4.1 предоставлено окно добавления бота.
+
+
+	
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om1}
+	\caption{окно добавления бота }
+	\label{om1:image}
+\end{figure}
+	
+Так же для корректной работы необходимо дать права администратора (рисунок 4.2). 
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om2}
+	\caption{Выдача боту необходимых прав}
+	\label{om2:image}
+\end{figure}
+
+Пользователь может ознакомиться с функционалом бота написав сообщение /start или /help (рисунок 4.3.1 и 4.3.2).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om3}
+	\caption{Информация о функционале бота}
+	\label{om3:image}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om4}
+	\caption{информация о функционале бота }
+	\label{om4:image}
+\end{figure}
+Пользователь может дать боту информацию о городе для получения прогноза погоды. Для того необходимо написать в чат команду /set\_city (рисунок 4.4).
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om5}
+	\caption{получение ботом информации о городе для предоставления погоды}
+	\label{om5:image}
+\end{figure}
+При написании в чате команды /current\_weather Бот отправляет информацию о погоде в данный момент(рисунок 4.5).
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om6}
+	\caption{Отправление информации о погоде в данный момент.}
+	\label{om6:image}
+\end{figure}
+Пользователь может изменить город для получения прогноза погоды при помощи команды /change\_city (рисунок 4.6.1 и 4.6.2).
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om7}
+	\caption{Изменение города для прогноза погоды}
+	\label{om7:image}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om8}
+	\caption{Изменение города для прогноза погоды}
+	\label{om8:image}
+\end{figure}
+Пользователь может попытаться отправить сообщение содержащие запрещенные слова (рисунок 4.7.1, 4.7.2 и 4.7.3)
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om9}
+	\caption{Сообщение содержащие запрещенное слово}
+	\label{om9:image}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om10}
+	\caption{Сообщение содержащие запрещенное слово попадает в чат}
+	\label{om10:image}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om11}
+	\caption{Удаление запрещенного слова}
+	\label{om11:image}
+\end{figure}
+Пользователь пытается отправить сообщение содержащие запрещенные слова замаскировав их текстом (рисунок 4.8.1,4.8.2,4.8.3). 
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om12}
+	\caption{Сообщение содержащие запрещенное слово}
+	\label{om12:image}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om13}
+	\caption{Сообщение содержащие запрещенное слово}
+	\label{om13:image}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om14}
+	\caption{Сообщение содержащие запрещенное слово удалено из чата}
+	\label{om14:image}
+\end{figure}
+Пользователь собирается отправить сообщение содержащие ссылку(рисунок 4.9.1,4.9.2,4.9.3)
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om15}
+	\caption{Сообщение содержащие ссылку}
+	\label{om15:image}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om16}
+	\caption{Сообщение попадает в чат}
+	\label{om16:image}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om17}
+	\caption{Сообщение удаляется из чата}
+	\label{om17:image}
+\end{figure}
+Пользователь пытается отправить сообщение содержащие ссылку замаскировав его текстом (рисунок 4.10.1, 4.10.2, 4.10.3).
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om18}
+	\caption{Сообщение содержащие ссылку}
+	\label{om18:image}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om19}
+	\caption{Сообщение попадает в чат}
+	\label{om19:image}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{om20}
+	\caption{Сообщение удаляется из чат}
+	\label{om20:image}
+\end{figure}
+
